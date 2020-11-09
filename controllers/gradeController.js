@@ -40,7 +40,7 @@ const findOne = async (req, res) => {
   const id = req.params.id;
 
   try {
-    const grade = await gradeModel.findOne({ _id: id });
+    const grade = await gradeModel.findById({ _id: id });
     res.json(grade);
     logger.info(`GET /grade - ${id}`);
   } catch (error) {
