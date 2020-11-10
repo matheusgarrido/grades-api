@@ -23,8 +23,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin:
-      'http://localhost:3000' || 'https://desafio4-grade-app.herokuapp.com/',
+    origin: [
+      'https://desafio4-grade-app.herokuapp.com/',
+      'http://localhost:3000',
+    ],
   })
 );
 // app.use('/grade');
