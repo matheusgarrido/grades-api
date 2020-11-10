@@ -21,14 +21,20 @@ const app = express();
 //define o dominio de origem para consumo do servico
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: [
-      'https://desafio4-grade-app.herokuapp.com/',
-      'http://localhost:3000',
-    ],
-  })
-);
+let whitelist = [
+  'https://desafio4-grade-app.herokuapp.com/',
+  'http://localhost:3000',
+];
+let corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+app.use(cors(corsOptions));
 // app.use('/grade');
 
 app.use('/', gradeRouter);
